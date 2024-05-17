@@ -7,12 +7,10 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import Popup from "../CustomPopup";
-import { useCategory } from "../../pages/Profile/hooks/useCategory";
 
-const DeleteCategory = ({ open, setOpen, data }) => {
+const DeleteCategory = ({ open, setOpen, data, deleteCategoryData }) => {
   const [value, setValue] = useState("");
   const [err, setErr] = useState("");
-  const { deleteCategory } = useCategory();
   const handleChange = (e) => {
     const temp = e.target.value;
     setValue(temp);
@@ -29,7 +27,7 @@ const DeleteCategory = ({ open, setOpen, data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value === data.name) {
-      const res = deleteCategory(data);
+      const res = deleteCategoryData(data.categoryId);
       if (res) {
         // refresh data
       }
@@ -40,10 +38,9 @@ const DeleteCategory = ({ open, setOpen, data }) => {
   };
   return (
     <Popup title={"Delete Category"} open={open} handleClose={handleClose}>
-      <DialogContent style={{minWidth:"450px"}}>
+      <DialogContent style={{ minWidth: "450px" }}>
         <DialogContentText>
-          Make sure to move the expenses under the category to other category
-          before deleting the category.
+          When the category is deleted the expenses would be moved to "Miscellaneous" category.
         </DialogContentText>
         <div>Please enter "{data.name}"" in the textbox to confirm delete.</div>
         <TextField

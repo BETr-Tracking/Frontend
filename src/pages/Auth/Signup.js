@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import AuthBase from "./components/AuthBase";
 import { Box, Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useUser } from "./hooks/useUser";
 
 const Signup = () => {
+  const { createUser } = useUser();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -117,6 +119,12 @@ const Signup = () => {
     const valid = submitValidate();
     if (valid) {
       // call custom hook function here
+      const reqData = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      };
+      createUser(reqData);
     }
   };
   return (

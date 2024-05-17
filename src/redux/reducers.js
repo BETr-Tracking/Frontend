@@ -1,8 +1,11 @@
 // reducers.js
-import { combineReducers } from '@reduxjs/toolkit';
+import { combineReducers } from "@reduxjs/toolkit";
+import notificationSlice from "../features/notificationSlice";
+import userSlice from "../features/userSlice";
 
 const rootReducer = combineReducers({
-  // Add other reducers here if you have more slices
+  notifications: notificationSlice,
+  user: userSlice,
 });
 
 export default rootReducer;

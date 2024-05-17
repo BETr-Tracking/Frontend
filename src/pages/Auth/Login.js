@@ -2,33 +2,26 @@ import React, { useState } from "react";
 import AuthBase from "./components/AuthBase";
 import { Box, Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useLoginUser } from "./hooks/useLoginUser";
+import { useUser } from "./hooks/useUser";
 import { useDisplayMsgs } from "../../hooks/useDisplayMsgs";
 
 const Login = () => {
-  const [data, setData] = useState({ email: "", password: "" });
-  const [errs, setErrs] = useState({ email: "", password: "" });
-  let validRegex =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-  const { loginUser } = useLoginUser();
+  const [data, setData] = useState({ username: "", password: "" });
+  const [errs, setErrs] = useState({ username: "", password: "" });
+  
+  const { loginUser } = useUser();
   const { handleErr } = useDisplayMsgs();
 
   const validate = (name, value) => {
     let isvalid = true;
     switch (name) {
-      case "email":
+      case "username":
         if (value.length === 0) {
           setErrs((prev) => {
-            return { ...prev, [name]: "Please enter Email" };
+            return { ...prev, [name]: "Please enter Username" };
           });
           isvalid = false;
-        } else if (!value.match(validRegex)) {
-          setErrs((prev) => {
-            return { ...prev, [name]: "Please enter valid Email" };
-          });
-          isvalid = false;
-        } else {
+        }  else {
           setErrs((prev) => {
             return { ...prev, [name]: "" };
           });
@@ -104,12 +97,12 @@ const Login = () => {
           >
             <TextField
               fullWidth
-              name="email"
-              label="Email"
-              placeholder="Enter Email"
-              value={data.email}
-              error={errs.email.length > 0}
-              helperText={errs.email}
+              name="username"
+              label="Username"
+              placeholder="Enter Username"
+              value={data.username}
+              error={errs.username.length > 0}
+              helperText={errs.username}
               onChange={handleChange}
             />
             <TextField

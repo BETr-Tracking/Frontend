@@ -5,11 +5,12 @@ import Crads from "./components/Crads";
 import ExpenseChart from "./components/ExpenseChart";
 import BudgetUsedSection from "./components/BudgetUsedSection";
 import RecentExpenses from "./components/RecentExpenses";
+import CardComponent from "../../components/CardComponent";
 
 const Dashboard = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
+      {/* <Grid container spacing={2}>
         <Grid xs={12} md={12} lg={6}>
           <Crads />
         </Grid>
@@ -22,7 +23,10 @@ const Dashboard = () => {
         <Grid xs={12} md={12} lg={7}>
           <RecentExpenses />
         </Grid>
-      </Grid>
+      </Grid> */}
+      <CardComponent>
+        No Data Available
+      </CardComponent>
     </Box>
   );
 };

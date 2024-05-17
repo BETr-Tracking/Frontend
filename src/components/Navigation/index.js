@@ -21,12 +21,26 @@ import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import "./navigation.css";
 import { links } from "./navLinks";
+import { useGetUser } from "./useGetUser";
+import { useSelector } from "react-redux";
+import { stringToHslColor } from "../../miscellaneous/utils";
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: name?stringToHslColor(name):"#ccc",
+    },
+    children: `${name ? name.split(" ")[0][0].toUpperCase() : ""}`,
+  };
+}
 
 const drawerWidth = 240;
 
 const Navigation = () => {
   const [menu, setMenu] = useState(null);
   const navigate = useNavigate();
+  const temp = useGetUser();
+  const user = useSelector((state) => state.user);
   const handleMenuOpen = (event) => {
     setMenu(event.currentTarget);
   };
@@ -64,12 +78,12 @@ const Navigation = () => {
           </Typography>
           <div className="nav-user-section">
             <div className="nav-user-info">
-              <div className="nav-user-name">Mr. name</div>
-              <div className="nav-user-email">name@email.com</div>
+              <div className="nav-user-name">{user.name}</div>
+              <div className="nav-user-email">{user.email}</div>
             </div>
             <Tooltip title="Open settings">
               <IconButton sx={{ p: 0 }} onClick={handleMenuOpen}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar {...stringAvatar(user?.name)} style={{border:"2px solid #fff"}} />
               </IconButton>
             </Tooltip>
             <Menu

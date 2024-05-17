@@ -1,62 +1,49 @@
+import React, { useState } from "react";
+import { useExpenses } from "../hooks/useExpenses";
+import Popup from "../../../components/CustomPopup";
 import { Button, DialogActions, DialogContent, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import Popup from "../CustomPopup";
 
-const CreateUpdateCategory = ({
-  open,
-  setOpen,
-  data,
-  createCategoryData,
-  editCategoryData,
-}) => {
-  const [name, setName] = useState("");
+const DeleteExpense = ({ open, setOpen, data }) => {
+  const [value, setValue] = useState("");
   const [err, setErr] = useState("");
+  const { deleteExpense } = useExpenses();
   const handleChange = (e) => {
     const temp = e.target.value;
-    setName(temp);
+    setValue(temp);
     if (temp.length === 0) {
       setErr("Please enter value.");
     }
   };
 
   const handleClose = () => {
-    setName("");
+    setValue("");
     setErr("");
     setOpen(false);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.length > 0) {
-      data ? editCategoryData({ name, id: data.categoryId }) : createCategoryData(name);
+    if (value === "DELETE") {
+      const res = deleteExpense(data);
+      if (res) {
+        // refresh data
+      }
       handleClose();
     } else {
-      setErr("Please enter category.");
+      setErr("Please enter 'DELETE'.");
     }
   };
-
-  useEffect(() => {
-    if (data && open) {
-      setName(data.name);
-    } else {
-      setName("");
-    }
-  }, [data, open]);
-
   return (
-    <Popup
-      title={data ? "Edit Category" : "Create Category"}
-      open={open}
-      handleClose={handleClose}
-    >
+    <Popup title={"Delete Expense"} open={open} handleClose={handleClose}>
       <DialogContent style={{ minWidth: "450px" }}>
+        <div>Please enter "DELETE" in the textbox to confirm delete.</div>
         <TextField
           required
-          label="Category"
+          // label="Category"
           type="text"
           fullWidth
           variant="standard"
           onChange={handleChange}
-          value={name}
+          value={value}
           error={err.length > 0}
           helperText={err}
         />
@@ -71,11 +58,11 @@ const CreateUpdateCategory = ({
           size="small"
           onClick={handleSubmit}
         >
-          {data ? "Edit Category" : "Create Category"}
+          Delete
         </Button>
       </DialogActions>
     </Popup>
   );
 };
 
-export default CreateUpdateCategory;
+export default DeleteExpense;

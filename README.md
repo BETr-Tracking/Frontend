@@ -2,6 +2,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Environment Variables
+
+The project uses the following environment variables:
+
+- `REACT_APP_API_URL`: The base URL for API requests.
+- `REACT_APP_DEBUG`: A flag to enable or disable debug mode.
+
+### Environment Configuration Files
+
+- `.env`: Default settings for all environments.
+- `.env.development`: Settings for the development environment.
+- `.env.production`: Settings for the production environment.
+- `.env.test`: Settings for the test environment.
+
 ## Available Scripts
 
 In the project directory, you can run:

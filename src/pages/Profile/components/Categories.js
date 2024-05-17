@@ -6,7 +6,12 @@ import { useCategory } from "../hooks/useCategory";
 import CreateUpdateCategory from "../../../components/Category/CreateUpdateCategory";
 
 const Categories = () => {
-  const { categories } = useCategory();
+  const {
+    categories,
+    createCategoryData,
+    editCategoryData,
+    deleteCategoryData,
+  } = useCategory();
   const [open, setOpen] = useState(false);
   return (
     <CardComponent title={"Categories"}>
@@ -15,11 +20,20 @@ const Categories = () => {
           Create Category
         </Button>
       </div>
-      <CreateUpdateCategory open={open} setOpen={setOpen} />
+      <CreateUpdateCategory
+        open={open}
+        setOpen={setOpen}
+        createCategoryData={createCategoryData}
+      />
       {categories && categories.length > 0 ? (
         <Stack direction="row" flexWrap="wrap" spacing={1} useFlexGap>
           {categories.map((item, index) => (
-            <Category key={index} data={item} />
+            <Category
+              key={index}
+              data={item}
+              editCategoryData={editCategoryData}
+              deleteCategoryData={deleteCategoryData}
+            />
           ))}
         </Stack>
       ) : (

@@ -11,7 +11,7 @@ const ProfileSection = () => {
   const validate = (name, value) => {
     let isvalid = true;
     switch (name) {
-      case "name":
+      case "username":
         if (value.length === 0) {
           setErrs((prev) => {
             return { ...prev, [name]: "Please enter Name" };
@@ -125,12 +125,12 @@ const ProfileSection = () => {
       >
         <TextField
           fullWidth
-          name="name"
-          label="Name"
-          placeholder="Enter Name"
-          value={data.name}
-          error={errs.name.length > 0}
-          helperText={errs.name}
+          name="username"
+          label="Username"
+          placeholder="Enter Username"
+          value={data.username}
+          error={errs.username.length > 0}
+          helperText={errs.username}
           onChange={handleChange}
         />
         <TextField
@@ -139,11 +139,12 @@ const ProfileSection = () => {
           label="Email"
           placeholder="Enter Email"
           value={data.email}
-          error={errs.email.length > 0}
-          helperText={errs.email}
-          onChange={handleChange}
+          // error={errs.email.length > 0}
+          // helperText={errs.email}
+          // onChange={handleChange}
+          disabled
         />
-        <TextField
+        {/* <TextField
           type="password"
           fullWidth
           name="password"
@@ -164,7 +165,7 @@ const ProfileSection = () => {
           error={errs.rpassword.length > 0}
           helperText={errs.rpassword}
           onChange={handleChange}
-        />
+        /> */}
       </Box>
       <div className="profile-submit">
         <Button onClick={handleSubmit} variant="contained" size="small">
