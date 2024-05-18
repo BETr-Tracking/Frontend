@@ -1,9 +1,6 @@
 # Stage 1: Build the React project
 FROM node:16-alpine AS build
 
-# Set working directory
-WORKDIR /app
-
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
