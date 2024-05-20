@@ -29,7 +29,7 @@ COPY --from=build /build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80 to the outside world
-EXPOSE 80
+EXPOSE 5000
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
