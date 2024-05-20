@@ -28,8 +28,8 @@ COPY --from=build /build /usr/share/nginx/html
 # Copy custom nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 80 to the outside world
-EXPOSE 5000
+# Expose port 3000 to the outside world
+EXPOSE 3000
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
