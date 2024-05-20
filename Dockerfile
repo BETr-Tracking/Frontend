@@ -13,8 +13,7 @@ COPY . .
 # Accept build arguments and set environment variables
 ARG REACT_APP_API_URL
 ARG REACT_APP_DEBUG
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
-ENV REACT_APP_API_BASE_URL=http://localhost:3307
+ENV REACT_APP_API_URL=http://localhost:8081
 ENV REACT_APP_DEBUG=$REACT_APP_DEBUG
 
 # Build the React application
