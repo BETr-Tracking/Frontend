@@ -3,7 +3,7 @@ import axios from "./instance";
 
 export const registerUser = async (data) => {
   try {
-    const res = await axios.post("http/api/user/createUser", data);
+    const res = await axios.post("http://localhost:8081/api/user/createUser", data);
     return res.data;
   } catch (error) {
     return handleErrResponse(error.response);
@@ -12,7 +12,7 @@ export const registerUser = async (data) => {
 
 export const getUserInfo = async (uid) => {
   try {
-    const res = await axios.get(`/api/user/getUser/${uid}`);
+    const res = await axios.get(`http://localhost:8081/api/user/getUser/${uid}`);
     return res.data;
   } catch (error) {
     return handleErrResponse(error.response);

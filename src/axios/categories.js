@@ -3,7 +3,7 @@ import axios from "./instance";
 
 export const createCategory = async (data) => {
   try {
-    const res = await axios.post("/api/category/createCategory", data);
+    const res = await axios.post("http://localhost:8081/api/category/createCategory", data);
     return res.data;
   } catch (error) {
     return handleErrResponse(error.response);
@@ -12,7 +12,7 @@ export const createCategory = async (data) => {
 
 export const getCategories = async (uid) => {
   try {
-    const res = await axios.get(`/api/category/getCategoriesOfUser/${uid}`);
+    const res = await axios.get(`http://localhost:8081/api/category/getCategoriesOfUser/${uid}`);
     return res.data;
   } catch (error) {
     return handleErrResponse(error.response);
@@ -21,7 +21,7 @@ export const getCategories = async (uid) => {
 
 export const updateCategory = async (data) => {
   try {
-    const res = await axios.put("/api/category/updateCategoryName", data);
+    const res = await axios.put("http://localhost:8081/api/category/updateCategoryName", data);
     return res.data;
   } catch (error) {
     return handleErrResponse(error.response);
@@ -30,7 +30,7 @@ export const updateCategory = async (data) => {
 
 export const deleteCategory = async (cid, data) => {
   try {
-    const res = await axios.delete(`/api/category/deleteCategory/${cid}`, {
+    const res = await axios.delete(`http://localhost:8081/api/category/deleteCategory/${cid}`, {
       data,
     });
     return res.data;
