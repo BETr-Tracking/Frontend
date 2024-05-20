@@ -21,7 +21,7 @@ export const getUserInfo = async (uid) => {
 
 export const updateUsername = async (data) => {
   try {
-    const res = await axios.put("/api/user/updateUserName", data);
+    const res = await axios.put("http://localhost:8081/api/user/updateUserName", data);
     return res.data;
   } catch (error) {
     return handleErrResponse(error.response);
@@ -30,7 +30,7 @@ export const updateUsername = async (data) => {
 
 export const updateUserPassword = async (data) => {
   try {
-    const res = await axios.put("/api/user/updateUserPwd", data);
+    const res = await axios.put("http://localhost:8081/api/user/updateUserPwd", data);
     return res.data;
   } catch (error) {
     return handleErrResponse(error.response);
