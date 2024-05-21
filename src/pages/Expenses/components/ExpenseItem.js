@@ -48,11 +48,15 @@ const ExpenseItem = ({ data }) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell align="left">{data.title}</TableCell>
+        <TableCell align="left">{data.description}</TableCell>
         <TableCell align="center">{data.amount}</TableCell>
         <TableCell align="center">{data.date}</TableCell>
         <TableCell align="center">
-          <DisplayCategory data={{ name: "category" }} />
+          {data.category ? (
+            <DisplayCategory data={{ name: data.category.name }} />
+          ) : (
+            <div>-</div>
+          )}
         </TableCell>
         <TableCell align="right">
           <IconButton onClick={handleClick}>
