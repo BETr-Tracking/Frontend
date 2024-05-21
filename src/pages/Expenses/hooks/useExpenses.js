@@ -1,29 +1,73 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { createExpense, deleteExpense, getExpenses, getSingleExpense, updateExpense } from "../../../axios/expenses";
 
 export const useExpenses = () => {
-  const [expenses, setExpenses] = useState([1, 2, 3]);
+  const [expenses, setExpenses] = useState([]);
   const [filteredExpenses, setFilteredExpenses] = useState([]);
   const [search, setSearch] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [singleExpense, setSingleExpense] = useState(null);
+  const user = useSelector((state) => state.user);
 
-  const getExpenses = async () => {};
+  const getExpensesData = async () => {
+    const res = await getExpenses(user.uid);
+    if (res) {
+      if (res.err) {
+      } else {
+        setExpenses(res);
+      }
+    }
+  };
 
-  const getSingleExpense = async (data) => {};
+  const getSingleExpenseData = async (eid) => {
+    const res = await getSingleExpense(eid);
+    if (res) {
+      if (res.err) {
+      } else {
+        setSingleExpense(res);
+      }
+    }
+  };
 
-  const createExpense = async (data) => {};
+  const createExpenseData = async (data) => {
+    const res = await createExpense({ id: user.uid, ...data });
+    if (res) {
+      if (res.err) {
+      } else {
+        setRefresh(true);
+        return true;
+      }
+    }
+  };
 
-  const updateExpense = async (data) => {};
+  const updateExpenseData = async (data) => {
+    const res = await updateExpense(data);
+    if (res) {
+      if (res.err) {
+      } else {
+        setRefresh(true);
+      }
+    }
+  };
 
-  const deleteExpense = async (data) => {};
+  const deleteExpenseData = async (eid) => {
+    const res = await deleteExpense(eid);
+    if (res) {
+      if (res.err) {
+      } else {
+        setRefresh(true);
+      }
+    }
+  };
 
   useEffect(() => {
-    getExpenses();
+    getExpensesData();
   }, []);
 
   useEffect(() => {
     if (refresh) {
-      getExpenses();
+      getExpensesData();
       setRefresh(true);
     }
   }, [refresh]);
@@ -37,9 +81,9 @@ export const useExpenses = () => {
   return {
     expenses,
     singleExpense,
-    getSingleExpense,
-    createExpense,
-    updateExpense,
-    deleteExpense,
+    getSingleExpenseData,
+    createExpenseData,
+    updateExpenseData,
+    deleteExpenseData,
   };
 };

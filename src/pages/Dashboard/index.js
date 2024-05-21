@@ -6,8 +6,10 @@ import ExpenseChart from "./components/ExpenseChart";
 import BudgetUsedSection from "./components/BudgetUsedSection";
 import RecentExpenses from "./components/RecentExpenses";
 import CardComponent from "../../components/CardComponent";
+import { useGetOverview } from "./hooks/useGetOverview";
 
 const Dashboard = () => {
+  const { data } = useGetOverview();
   return (
     <Box sx={{ flexGrow: 1 }}>
       {/* <Grid container spacing={2}>
@@ -24,9 +26,7 @@ const Dashboard = () => {
           <RecentExpenses />
         </Grid>
       </Grid> */}
-      <CardComponent>
-        No Data Available
-      </CardComponent>
+      <CardComponent>{data?data.toString():"No data available"}</CardComponent>
     </Box>
   );
 };
