@@ -20,13 +20,13 @@ export const getExpenses = async (uid) => {
 };
 
 export const getSingleExpense = async (eid) => {
-    try {
-      const res = await axios.get(`/api/expense/getExpense/${eid}`);
-      return res.data;
-    } catch (error) {
-      return handleErrResponse(error.response);
-    }
-  };
+  try {
+    const res = await axios.get(`/api/expense/getExpense/${eid}`);
+    return res.data;
+  } catch (error) {
+    return handleErrResponse(error.response);
+  }
+};
 
 export const updateExpense = async (data) => {
   try {
@@ -37,9 +37,9 @@ export const updateExpense = async (data) => {
   }
 };
 
-export const deleteExpense = async (eid) => {
+export const deleteExpense = async (eid, data) => {
   try {
-    const res = await axios.delete(`/api/expense/deleteExpense/${eid}`);
+    const res = await axios.delete(`/api/expense/deleteExpense/${eid}`, data);
     return res.data;
   } catch (error) {
     return handleErrResponse(error.response);

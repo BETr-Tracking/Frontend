@@ -14,8 +14,16 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditExpense from "./EditExpense";
 import DeleteExpense from "./DeleteExpense";
+import dayjs from "dayjs";
 
-const ExpenseItem = ({ data }) => {
+const ExpenseItem = ({
+  data,
+  singleExpense,
+  getSingleExpenseData,
+  updateExpenseData,
+  deleteExpenseData,
+  view,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -39,7 +47,7 @@ const ExpenseItem = ({ data }) => {
   return (
     <>
       <TableRow>
-        <TableCell>
+        {/* <TableCell>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -47,10 +55,12 @@ const ExpenseItem = ({ data }) => {
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
+        </TableCell> */}
+        <TableCell align="left">
+          {dayjs(data.date).format("DD/MM/YYYY")}
         </TableCell>
-        <TableCell align="left">{data.description}</TableCell>
+        <TableCell align="center">{data.description}</TableCell>
         <TableCell align="center">{data.amount}</TableCell>
-        <TableCell align="center">{data.date}</TableCell>
         <TableCell align="center">
           {data.category ? (
             <DisplayCategory data={{ name: data.category.name }} />
@@ -58,36 +68,46 @@ const ExpenseItem = ({ data }) => {
             <div>-</div>
           )}
         </TableCell>
-        <TableCell align="right">
-          <IconButton onClick={handleClick}>
-            <MoreVertIcon />
-          </IconButton>
+        {!view && (
+          <TableCell align="right">
+            <IconButton onClick={handleClick}>
+              <MoreVertIcon />
+            </IconButton>
 
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleEdit}>Edit</MenuItem>
-            <MenuItem onClick={handleDelete}>Delete</MenuItem>
-          </Menu>
-          {/* edit popup */}
-          <EditExpense open={editOpen} setOpen={setEditOpen} id={data.id} />
-          {/* delete popup */}
-          <DeleteExpense
-            open={deleteOpen}
-            setOpen={setDeleteOpen}
-            data={data}
-          />
-        </TableCell>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleEdit}>Edit</MenuItem>
+              <MenuItem onClick={handleDelete}>Delete</MenuItem>
+            </Menu>
+            {/* edit popup */}
+            <EditExpense
+              open={editOpen}
+              setOpen={setEditOpen}
+              id={data.expenseId}
+              singleExpense={singleExpense}
+              getSingleExpenseData={getSingleExpenseData}
+              updateExpenseData={updateExpenseData}
+            />
+            {/* delete popup */}
+            <DeleteExpense
+              open={deleteOpen}
+              setOpen={setDeleteOpen}
+              data={data}
+              deleteExpenseData={deleteExpenseData}
+            />
+          </TableCell>
+        )}
       </TableRow>
-      <TableRow>
+      {/* <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>content here</Box>
           </Collapse>
         </TableCell>
-      </TableRow>
+      </TableRow> */}
     </>
   );
 };

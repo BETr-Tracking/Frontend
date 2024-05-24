@@ -17,6 +17,8 @@ export const useGetOverview = () => {
       } else {
         setData(res);
       }
+    } else {
+      setData({});
     }
   };
   useEffect(() => {
@@ -27,3 +29,19 @@ export const useGetOverview = () => {
 
   return { data };
 };
+
+// totalAmt: 10000,
+//         totalSpent: 2000,
+//         expenses: [
+//           {
+//             description: "Food Expense",
+//             category: { name: "Food" },
+//             amount: 2000,
+//             date: new Date("09/05/2024"),
+//           },
+//         ],
+//         clms: [
+//           { name: "Food", all_amt: 7000, spent_amt: 2000 },
+//           { name: "Travel", all_amt: 2000, spent_amt: 0 },
+//           { name: "misc", all_amt: 1000, spent_amt: 0 },
+//         ],

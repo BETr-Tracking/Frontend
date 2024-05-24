@@ -1,12 +1,13 @@
-import React from 'react'
-import CardComponent from '../../../components/CardComponent'
+import React from "react";
+import CardComponent from "../../../components/CardComponent";
+import ExpenseList from "../../Expenses/components/ExpenseList";
 
-const RecentExpenses = () => {
+const RecentExpenses = ({ data }) => {
   return (
     <CardComponent title={"Recent Expenses"}>
-        recent expenses
+      <ExpenseList expenses={data} view={true} />
     </CardComponent>
-  )
-}
+  );
+};
 
-export default RecentExpenses
+export default RecentExpenses;

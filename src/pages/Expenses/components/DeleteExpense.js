@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useExpenses } from "../hooks/useExpenses";
 import Popup from "../../../components/CustomPopup";
 import { Button, DialogActions, DialogContent, TextField } from "@mui/material";
 
-const DeleteExpense = ({ open, setOpen, data }) => {
+const DeleteExpense = ({ open, setOpen, data, deleteExpenseData }) => {
   const [value, setValue] = useState("");
   const [err, setErr] = useState("");
-  const { deleteExpense } = useExpenses();
   const handleChange = (e) => {
     const temp = e.target.value;
     setValue(temp);
@@ -23,11 +21,8 @@ const DeleteExpense = ({ open, setOpen, data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (value === "DELETE") {
-      const res = deleteExpense(data);
-      if (res) {
-        // refresh data
-      }
-      handleClose();
+      const res = deleteExpenseData(data);
+      res && handleClose();
     } else {
       setErr("Please enter 'DELETE'.");
     }
@@ -38,7 +33,6 @@ const DeleteExpense = ({ open, setOpen, data }) => {
         <div>Please enter "DELETE" in the textbox to confirm delete.</div>
         <TextField
           required
-          // label="Category"
           type="text"
           fullWidth
           variant="standard"

@@ -16,27 +16,35 @@ import { useCategory } from "../../Profile/hooks/useCategory";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-const CreateExpense = ({ open, setOpen }) => {
+const CreateExpense = ({ open, setOpen, createExpenseData }) => {
   const initialState = {
-    title: "",
-    description: "",
+    desc: "",
     cid: null,
     date: null,
     amount: null,
   };
   const [data, setData] = useState(initialState);
-  const { createExpense } = useExpenses();
   const { categories } = useCategory();
 
   const handleChange = (e) => {
     const t = e.target;
+    setData((prev) => {
+      return {
+        ...prev,
+        [t.name]: t.name === "amount" ? Number(t.value) : t.value,
+      };
+    });
   };
 
   const handleClose = () => {
+    setData(initialState);
     setOpen(false);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    const res = createExpenseData(data);
+    res && handleClose();
+  };
   return (
     <Popup title={"Create Expense"} open={open} handleClose={handleClose}>
       <DialogContent style={{ minWidth: "450px" }}>
@@ -52,22 +60,27 @@ const CreateExpense = ({ open, setOpen }) => {
           noValidate
           autoComplete="off"
         >
-          <TextField
-            label="Title"
-            name="title"
-            type="text"
-            fullWidth
-            onChange={handleChange}
-            value={data.title}
-          />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Date"
+              slotProps={{ textField: { fullWidth: true } }}
+              value={data.date}
+              onChange={(newValue) =>
+                setData((prev) => {
+                  return { ...prev, date: newValue };
+                })
+              }
+            />
+          </LocalizationProvider>
+
           <TextField
             label="Description"
-            name="description"
+            name="desc"
             multiline
             maxRows={4}
             fullWidth
             onChange={handleChange}
-            value={data.description}
+            value={data.desc}
           />
           <TextField
             label="Amount"
@@ -78,8 +91,13 @@ const CreateExpense = ({ open, setOpen }) => {
             value={data.amount}
           />
           <FormControl fullWidth>
-            <InputLabel>Category</InputLabel>
-            <Select value={data.cid} label="Category" onChange={handleChange}>
+            <InputLabel id="create-expense-select">Category</InputLabel>
+            <Select
+              value={data.cid}
+              labelId="create-expense-select"
+              name="cid"
+              onChange={handleChange}
+            >
               {categories.map((item, i) => (
                 <MenuItem key={i} value={item.categoryId}>
                   {item.name}
@@ -87,16 +105,6 @@ const CreateExpense = ({ open, setOpen }) => {
               ))}
             </Select>
           </FormControl>
-          <LocalizationProvider dateAdapter={AdapterDayjs} >
-            <DatePicker
-              value={data.date}
-              onChange={(newValue) =>
-                setData((prev) => {
-                  return { ...prev, date: newValue };
-                })
-              }
-            />
-          </LocalizationProvider>
         </Box>
       </DialogContent>
       <DialogActions>

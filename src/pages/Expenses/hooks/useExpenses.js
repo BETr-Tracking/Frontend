@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { createExpense, deleteExpense, getExpenses, getSingleExpense, updateExpense } from "../../../axios/expenses";
+import {
+  createExpense,
+  deleteExpense,
+  getExpenses,
+  getSingleExpense,
+  updateExpense,
+} from "../../../axios/expenses";
 
 export const useExpenses = () => {
   const [expenses, setExpenses] = useState([]);
@@ -15,6 +21,7 @@ export const useExpenses = () => {
     if (res) {
       if (res.err) {
       } else {
+        // console.log(res)
         setExpenses(res);
       }
     }
@@ -31,7 +38,13 @@ export const useExpenses = () => {
   };
 
   const createExpenseData = async (data) => {
-    const res = await createExpense({ id: user.uid, ...data });
+    // console.log(data);
+    const res = await createExpense({
+      uid: user.uid,
+      month: new Date(data.date).getMonth() + 1,
+      year: new Date(data.date).getFullYear(),
+      ...data,
+    });
     if (res) {
       if (res.err) {
       } else {
@@ -42,17 +55,25 @@ export const useExpenses = () => {
   };
 
   const updateExpenseData = async (data) => {
-    const res = await updateExpense(data);
+    const res = await updateExpense({
+      month: new Date(data.date).getMonth() + 1,
+      year: new Date(data.date).getFullYear(),
+      ...data,
+    });
     if (res) {
       if (res.err) {
       } else {
         setRefresh(true);
+        return true;
       }
     }
   };
 
-  const deleteExpenseData = async (eid) => {
-    const res = await deleteExpense(eid);
+  const deleteExpenseData = async (data) => {
+    const res = await deleteExpense(data.expenseId, {
+      month: new Date(data.date).getMonth() + 1,
+      year: new Date().getFullYear(),
+    });
     if (res) {
       if (res.err) {
       } else {

@@ -26,7 +26,22 @@ const Dashboard = () => {
           <RecentExpenses />
         </Grid>
       </Grid> */}
-      <CardComponent>{data?data.toString():"No data available"}</CardComponent>
+
+      {data ? (
+        <Grid container spacing={2}>
+          <Grid xs={12} md={12} lg={5}>
+            <Crads data={data} />
+          </Grid>
+          <Grid xs={12} md={12} lg={7}>
+            <BudgetUsedSection data={data.clms} />
+          </Grid>
+          <Grid xs={12} md={12} lg={12}>
+            <RecentExpenses data={data.expenses} />
+          </Grid>
+        </Grid>
+      ) : (
+        <CardComponent>No data available</CardComponent>
+      )}
     </Box>
   );
 };
