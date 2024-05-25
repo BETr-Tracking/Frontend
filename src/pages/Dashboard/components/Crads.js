@@ -22,7 +22,19 @@ const Crads = ({ data }) => {
             <div style={{ fontSize: "16px", fontWeight: "bold" }}>
               Total Spent
             </div>
-            <div style={{ fontSize: "32px", color: "#888" }}>
+            <div
+              style={{
+                fontSize: "32px",
+                color:
+                  data && data.totalAmt
+                    ? data.totalSpent > data.totalAmt
+                      ? "red"
+                      : data.totalSpent > data.totalAmt / 2
+                      ? "orange"
+                      : "#888"
+                    : "#888",
+              }}
+            >
               {data && data.totalSpent ? data.totalSpent : "-"}
             </div>
           </CardComponent>

@@ -28,7 +28,20 @@ const BudgetUsedSection = ({ data }) => {
                   <TableRow>
                     <TableCell align="left">{row.name}</TableCell>
                     <TableCell align="center">{row.all_amt}</TableCell>
-                    <TableCell align="center">{row.spent_amt}</TableCell>
+                    <TableCell align="center">
+                      <span
+                        style={{
+                          color:
+                            row.spent_amt > row.all_amt
+                              ? "red"
+                              : row.spent_amt > row.all_amt / 2
+                              ? "orange"
+                              : "#000",
+                        }}
+                      >
+                        {row.spent_amt}
+                      </span>
+                    </TableCell>
                   </TableRow>
                 );
               })}
