@@ -55,6 +55,8 @@ const CommonBudgetComponent = ({ data,updateBudgetData, deleteBudgetData }) => {
         <TableCell align="center">{data.budget.month}</TableCell>
         <TableCell align="center">{data.budget.year}</TableCell>
         <TableCell align="center">{data.categories.length}</TableCell>
+        <TableCell align="center">{data.allocated_amount}</TableCell>
+        <TableCell align="center">{data.spent_amount}</TableCell>
         <TableCell align="right">
           <IconButton onClick={handleClick}>
             <MoreVertIcon />
@@ -85,7 +87,7 @@ const CommonBudgetComponent = ({ data,updateBudgetData, deleteBudgetData }) => {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
               <TableContainer component={Paper}>
@@ -93,7 +95,8 @@ const CommonBudgetComponent = ({ data,updateBudgetData, deleteBudgetData }) => {
                   <TableHead>
                     <TableRow>
                       <TableCell>Category</TableCell>
-                      <TableCell align="right">Amount</TableCell>
+                      <TableCell align="right">Allocated Amount</TableCell>
+                      <TableCell align="right">Spent Amount</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -107,7 +110,8 @@ const CommonBudgetComponent = ({ data,updateBudgetData, deleteBudgetData }) => {
                         <TableCell component="th" scope="row">
                           {row.name}
                         </TableCell>
-                        <TableCell align="right">{row.amt}</TableCell>
+                        <TableCell align="right">{row.allocated_amount}</TableCell>
+                        <TableCell align="right">{row.spent_amount}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

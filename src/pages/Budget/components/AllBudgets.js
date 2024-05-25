@@ -46,6 +46,8 @@ const CommonBudgetList = ({ data, deleteBudgetData, updateBudgetData }) => {
             <TableCell align="center">Month</TableCell>
             <TableCell align="center">Year</TableCell>
             <TableCell align="center">No of Categories</TableCell>
+            <TableCell align="center">Allocated Amount</TableCell>
+            <TableCell align="center">Spent Amount</TableCell>
             <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
