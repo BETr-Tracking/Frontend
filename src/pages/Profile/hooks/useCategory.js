@@ -15,7 +15,7 @@ export const useCategory = () => {
   const deleteCategoryData = async (cid) => {
     // delete fun and refresh
     const reqData = {
-      month: new Date().getMonth(),
+      month: new Date().getMonth()+1,
       year: new Date().getFullYear(),
     };
     const res = await deleteCategory(cid, reqData);
