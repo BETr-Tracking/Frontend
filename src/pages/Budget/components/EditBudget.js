@@ -11,7 +11,7 @@ const EditBudget = ({ open, setOpen, id, updateBudgetData }) => {
     categories: [],
   };
   const [data, setData] = useState(initialState);
-  const { singleBudget, getSingleBudget } = useBudget();
+  const { singleBudget, getSingleBudgetData } = useBudget();
   const { categories } = useCategory();
 
   const handleChange = (e) => {
@@ -26,7 +26,7 @@ const EditBudget = ({ open, setOpen, id, updateBudgetData }) => {
 
   useEffect(() => {
     if (open && id) {
-      getSingleBudget(id);
+      getSingleBudgetData(id);
     }
   }, [open, id]);
 
