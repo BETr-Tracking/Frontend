@@ -8,7 +8,7 @@ export const useGetOverview = () => {
   const getData = async () => {
     const reqData = {
       uid: user.uid,
-      month: new Date().getMonth(),
+      month: new Date().getMonth()+1,
       year: new Date().getFullYear(),
     };
     const res = await getDashboardInfo(reqData);
