@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import CardComponent from "../../../components/CardComponent";
 import { Box, Button, TextField } from "@mui/material";
 import { useProfile } from "../hooks/useProfile";
+import UpdatePassword from "./UpdatePassword";
 
 const ProfileSection = () => {
-  const { data, setData, errs, setErrs, updateData } = useProfile();
+  const { data, setData, errs, setErrs, updateData,updatePassword } = useProfile();
+  const [editPassOpen, setEditPassOpen] = useState(false)
   let validRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -168,10 +170,14 @@ const ProfileSection = () => {
         /> */}
       </Box>
       <div className="profile-submit">
+        <Button onClick={()=>setEditPassOpen(true)} variant="contained" size="small">
+          Update Password
+        </Button>
         <Button onClick={handleSubmit} variant="contained" size="small">
           Update
         </Button>
       </div>
+      <UpdatePassword open={editPassOpen} setOpen={setEditPassOpen} updatePassword={updatePassword}/>
     </CardComponent>
   );
 };

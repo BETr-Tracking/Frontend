@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserInfo, updateUsername } from "../../../axios/profile";
+import { getUserInfo, updateUserPassword, updateUsername } from "../../../axios/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../features/userSlice";
 
@@ -43,9 +43,20 @@ export const useProfile = () => {
     }
   };
 
+  const updatePassword = async (value) => {
+    const reqData = { uid: user.uid, name_or_pwd: value };
+    const res = await updateUserPassword(reqData);
+    if (res) {
+      if (res.err) {
+      } else {
+        getData();
+      }
+    }
+  };
+
   useEffect(() => {
     getData();
   }, []);
 
-  return { data, setData, errs, setErrs, updateData };
+  return { data, setData, errs, setErrs, updateData,updatePassword };
 };
